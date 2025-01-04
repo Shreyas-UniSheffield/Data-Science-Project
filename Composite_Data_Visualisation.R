@@ -122,7 +122,7 @@ heat_map<- ggplot(win_rate_data, aes(x = tournament, y = winner, fill = win_rate
 print(heat_map)
 
 
-#Composite Visualization:
+#Creating a Composite Visualization:
 library(patchwork)
 composite_visualization <- (treemap+line_chart) /(sankey_plot+heat_map)+
   plot_annotation(
@@ -134,5 +134,5 @@ composite_visualization <- (treemap+line_chart) /(sankey_plot+heat_map)+
     )
   )
 
-
+#Saving the composite visualisation
 ggsave("new_composite_visualizations.pdf", plot = composite_visualization ,width = 32, height = 20, dpi = 300)

@@ -50,26 +50,3 @@ ggplot(correlation_by_venue, aes(x = factor(neutral), y = correlation, fill = fa
   labs(title = "Correlation between Home and Away Scores by Venue",
        x = "Neutral Venue (0 = No, 1 = Yes)",
        y = "Correlation")
-#Investigate correlation for FIFA World Cup and Confiderations cup
-world_cup_data <- ready_to_analyse_data %>% filter(tournament == "FIFA World Cup")
-nations_league_data <- ready_to_analyse_data %>% filter(tournament == "UEFA Nations League")
-
-correlation_world_cup <- cor(world_cup_data$home_score,world_cup_data$away_score, use = "complete.obs")
-correlation_nations_league <- cor(nations_league_data$home_score, nations_league_data$away_score, use = "complete.obs")
-print(paste("Correlation for FIFA World Cup : ",correlation_world_cup ))
-print(paste("Correlation for UEFA Nations League : ",correlation_nations_league ))
-
-#Both tournaments show a weak negative correlation, meaning that higher scores for the home team are generally associated with slightly lower scores for the away team, but the correlation is not strong enough to indicate a clear, consistent pattern.
-# FIFA World Cup Visualization
-ggplot(world_cup_data, aes(x = home_score, y = away_score)) +
-  geom_point(alpha = 0.5, color = "blue") +
-  labs(title = "Home vs Away Scores for FIFA World Cup",
-       x = "Home Score", y = "Away Score") +
-  theme_minimal()
-
-# UEFA Nations League Visualization
-ggplot(nations_league_data, aes(x = home_score, y = away_score)) +
-  geom_point(alpha = 0.5, color = "red") +
-  labs(title = "Home vs Away Scores for UEFA Nations League",
-       x = "Home Score", y = "Away Score") +
-  theme_minimal()

@@ -11,10 +11,11 @@ library(sf) #Tools for dealing spatial data
 library(tmap) #Creating maps with spatial data
 install.packages("naniar")
 library(naniar) #For creating and customizing tables
-library(tidyverse)
+library(tidyverse) #For data transformation and presentation
 install.packages("gtExtras")
-library(gtExtras)
+library(gtExtras) #For creating customised tables
 
+#Reading the csv files
 result_info <- read.csv("results.csv")
 shootout_info <- read.csv("shootouts.csv")
 scorers_info <- read.csv("goalscorers.csv")
@@ -55,5 +56,6 @@ merged_data <- result_info %>%
 
 View(merged_data)  
 
+#Checking for any missing values
 sum(is.na(merged_data))
 miss_var_summary(merged_data) %>% gt() %>% gt_theme_guardian() %>% tab_header("Missing Merged info")

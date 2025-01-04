@@ -11,9 +11,9 @@ View(merged_data)
 merged_data <- merged_data %>% filter(date >= "1950-06-24") 
 View(merged_data)
 
+#Handle scorer, own_goal, penalty, minute, team, first_shooter variables for matches without data for these variables
 merged_data_clean <- merged_data %>%
   mutate(
-    # Handle scorer-related variables for matches without scorer data
     scorer = ifelse(
       is.na(scorer) & (date %in% no_scorer_data$date),
       NA,
@@ -39,8 +39,7 @@ merged_data_clean <- merged_data %>%
       NA,
       team
     ),
-    
-    # Handle shootout-related variables for matches without shootout data
+   
     first_shooter = ifelse(
       is.na(first_shooter) & (date %in% no_shootout_data$date),
       NA,
@@ -55,6 +54,8 @@ miss_var_summary(merged_data_clean) %>% gt() %>% gt_theme_guardian() %>% tab_hea
 ready_to_analyse_data <- merged_data_clean %>%
   select(-minute, -first_shooter, -team, -scorer)
 
+#To check for any missing values in tabular format
 miss_var_summary(ready_to_analyse_data) %>% gt() %>% gt_theme_guardian() %>% tab_header(title = "Missing Ready to Analyse Data info")
 
+#Viewing the variable that is to be used for further analysis
 View(ready_to_analyse_data)
